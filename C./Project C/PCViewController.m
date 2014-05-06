@@ -76,6 +76,13 @@
     [self configureInputView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.nationViewController.view resetOriginY:self.view.frame.size.height - self.nationViewController.view.frame.size.height];
+    [self.keyboardViewController.view resetOriginY:self.view.frame.size.height - self.keyboardViewController.view.frame.size.height];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -88,13 +95,13 @@
 
 - (void)configureNationView
 {
-    [self.nationViewController.view resetOriginY:self.view.frame.size.height - self.nationViewController.view.frame.size.height - KNavigationBar];
+    
     [self.view addSubview:self.nationViewController.view];
 }
 
 - (void)configureKeyboardView
 {    
-    [self.keyboardViewController.view resetOriginY:self.view.frame.size.height - self.keyboardViewController.view.frame.size.height - KNavigationBar];
+    
     [self.view addSubview:self.keyboardViewController.view];
 }
 
@@ -217,7 +224,6 @@
 
 - (void)updateSentence
 {
-    NSLog(@"caoniamde");
     float rate = [[CurrencyManager defaultManager] rateFrom:self.fromCountryString to:self.toCountryString];
     self.equalSetenceLabel.text =
     [NSString stringWithFormat:@"1 %@ ≈ %.2f %@", self.fromCountryString, rate, self.toCountryString];

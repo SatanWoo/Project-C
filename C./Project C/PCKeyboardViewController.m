@@ -26,15 +26,17 @@
 
 - (void)hideKeyboard
 {
+    NSLog(@"self origin y is %g", self.view.frame.origin.y);
     [UIView animateWithDuration:0.6f animations:^{
-        [self.view resetOriginY:460];
+        [self.view resetOriginY:self.view.superview.frame.size.height];
     }];
 }
 
 - (void)showKeyboard
 {
+    NSLog(@"screen height is %g, and frame height is %g",self.view.superview.frame.size.height, self.view.frame.size.height);
     [UIView animateWithDuration:0.5f delay:0.2f options:UIViewAnimationOptionCurveEaseOut animations:^{
-         [self.view resetOriginY:171];
+         [self.view resetOriginY:self.view.superview.frame.size.height - self.view.frame.size.height];
     } completion:^(BOOL finished) {
     }];
 }
